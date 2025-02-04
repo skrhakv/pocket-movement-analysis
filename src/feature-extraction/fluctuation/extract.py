@@ -7,7 +7,6 @@ import springcraft_utils
 
 DATASET = 'rigid-dataset'
 DATASET_PATH = f'../../../datasets/{DATASET}'
-CIF_FILES_PATH = '/home/vit/Projects/deeplife-project/data/cif_files'
 OUTPUT_PATH = f'../../../data/features/fluctuation/{DATASET}'
 OLD_OUTPUT_PATH = F'../../../data/features/fluctuation/old/rigid-dataset'
 
@@ -40,4 +39,4 @@ for id in ids.keys():
     print(f'Processing {id} ...')
     # read file
     mmcif_filename = f'{id[:4]}.cif'
-    springcraft_utils.generate_fluctuation(id, ids[id], CIF_FILES_PATH, OUTPUT_PATH)
+    springcraft_utils.generate_fluctuation(id, ids[id], OUTPUT_PATH)

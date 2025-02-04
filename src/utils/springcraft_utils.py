@@ -5,23 +5,11 @@ import biotite.structure.io.pdbx as pdbx
 import biotite.database.rcsb as rcsb
 import numpy as np
 import biotite_utils
+import constants
 import os
 
-def generate_fluctuation(id, auth_binding_indices, mmcif_file_location, output_path):
-    mmcif_filename = f'{id[:4]}.cif'
-
-    mmcif_filepath = f'{mmcif_file_location}/{mmcif_filename}'
-
-    # download mmCIF file if doesn't exist
-    if not os.path.isfile(mmcif_filepath):
-        print(f'\tDownloading {mmcif_filepath} ...')
-        rcsb.fetch(id[:4], 'cif', target_path=mmcif_file_location)
-
-    mmcif_file = pdbx.CIFFile.read(mmcif_filepath)
-    # load file to biotite object
-    whole_structure = pdbx.get_structure(mmcif_file, model=1, include_bonds=True)
-    protein = whole_structure[struc.filter_amino_acids(whole_structure)]
-
+def generate_fluctuation(id, auth_binding_indices, output_path):
+    protein = biotite_utils.load_structure(id)
     # some errors with non-standard residue types
     protein_backbone = biotite_utils.get_protein_backbone(protein, id[4:])
     ff = springcraft.TabulatedForceField.sd_enm(protein_backbone)
