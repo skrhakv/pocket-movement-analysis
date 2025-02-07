@@ -75,7 +75,7 @@ def align_sequences(sequence1, sequence2):
         sequence1, sequence2, matrix)
     return alignments
 
-def load_structure(id):
+def load_structure(id, use_author_fields=True):
     """Downloads structure from PDB and returns the protein part of the structure.
 
     Args:
@@ -92,7 +92,7 @@ def load_structure(id):
 
     mmcif_file = pdbx.CIFFile.read(mmcif_filepath)
     # load file to biotite object
-    whole_structure = pdbx.get_structure(mmcif_file, model=1, include_bonds=True)
+    whole_structure = pdbx.get_structure(mmcif_file, model=1, include_bonds=True, use_author_fields=use_author_fields)
     return whole_structure[struc.filter_amino_acids(whole_structure)]
 
     
