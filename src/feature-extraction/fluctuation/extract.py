@@ -21,8 +21,9 @@ def load_apo_structures(path):
             if '-' in holo_structure['apo_chain']:
                 continue
             id = apo_id + holo_structure['apo_chain']
-            if id in ids: ids[id].update(holo_structure['apo_pocket_selection'])
-            else: ids[id] = set([int(''.join(filter(str.isdigit, residue.split('_')[1]))) for residue in holo_structure['apo_pocket_selection']])
+            binding_residues = set([int(''.join(filter(str.isdigit, residue.split('_')[1]))) for residue in holo_structure['apo_pocket_selection']])
+            if id in ids: ids[id].update(binding_residues)
+            else: ids[id] = binding_residues
     return ids
 
 ids = {}
@@ -37,6 +38,4 @@ for id in ids.keys():
         shutil.copy(f'{OLD_OUTPUT_PATH}/fluctuation/{id}.npy', f'{OUTPUT_PATH}/fluctuation')   
         shutil.copy(f'{OLD_OUTPUT_PATH}/indices/{id}.npy', f'{OUTPUT_PATH}/indices')   
     print(f'Processing {id} ...')
-    # read file
-    mmcif_filename = f'{id[:4]}.cif'
     springcraft_utils.generate_fluctuation(id, ids[id], OUTPUT_PATH)
