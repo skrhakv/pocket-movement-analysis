@@ -1,5 +1,30 @@
 import json
 
+
+def get_annotations(dataset_path):
+    def load_apo_structures(path):
+        with open(path) as f:
+            dataset = json.load(f)
+
+        ids = {}
+        for apo_id, holo_structures in dataset.items():
+            for holo_structure in holo_structures:
+                # skip multichain structures
+                if '-' in holo_structure['apo_chain']:
+                    continue
+                id = apo_id + holo_structure['apo_chain']
+                binding_residues = set([int(''.join(filter(str.isdigit, residue.split('_')[1]))) for residue in holo_structure['apo_pocket_selection']])
+                if id in ids: ids[id].update(binding_residues)
+                else: ids[id] = binding_residues
+        return ids
+
+    ids = {}
+    for fold in [f'train-fold-{i}.json' for i in range(4)]:
+        subset_ids = load_apo_structures(f'{dataset_path}/folds/{fold}')
+        ids = {**ids, **subset_ids}
+    return ids 
+
+
 def load_subset(path):
     with open(path) as f:
         dataset = json.load(f)
