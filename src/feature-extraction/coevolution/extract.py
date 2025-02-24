@@ -142,9 +142,6 @@ def compute_coevolution(ids, dataset):
         coevolution_len = get_coevolution_len(sorted_coevolving_pairs_scores)
 
         assert len(c_alphas) == coevolution_len, f'{id}: coevolution data length doesn\'t match the sequence length! {len(c_alphas)} {coevolution_len}'
-
-        a = np.array(sorted_coevolving_pairs_scores)
-
         np.save(f'{output_path}/{id}.npy', np.array(sorted_coevolving_pairs_scores))
 
 if __name__ == "__main__":
