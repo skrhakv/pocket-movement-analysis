@@ -2,3 +2,5 @@ src/feature-extraction/fluctuation/note.md
 data/
 datasets/
 src/utils/__pycache__/
+src/feature-extraction/coevolution/data/
+src/feature-extraction/frustration/modified-pdbs/
