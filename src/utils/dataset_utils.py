@@ -1,7 +1,7 @@
 import json
 
 
-def get_annotations(dataset_path):
+def get_annotations(dataset_path, whole_dataset=False):
     def load_apo_structures(path):
         with open(path) as f:
             dataset = json.load(f)
@@ -19,9 +19,12 @@ def get_annotations(dataset_path):
         return ids
 
     ids = {}
-    for fold in [f'train-fold-{i}.json' for i in range(4)]:
-        subset_ids = load_apo_structures(f'{dataset_path}/folds/{fold}')
-        ids = {**ids, **subset_ids}
+    if not whole_dataset:
+        for fold in [f'train-fold-{i}.json' for i in range(4)]:
+            subset_ids = load_apo_structures(f'{dataset_path}/folds/{fold}')
+            ids = {**ids, **subset_ids}
+    else:
+        ids = load_apo_structures(f'{dataset_path}/dataset.json')
     return ids 
 
 
