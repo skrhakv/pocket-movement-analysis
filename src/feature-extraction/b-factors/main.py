@@ -66,7 +66,7 @@ def get_fold(pdb_id, folds):
 
 
 def main():
-    apo_ids = [i.split('.')[0] for i in os.listdir('/home/vit/Projects/flexibility-analysis/data/features/fluctuation/cryptobench-dataset/fluctuation')]
+    apo_ids = [i.split('.')[0] for i in os.listdir(f'/home/vit/Projects/flexibility-analysis/data/features/fluctuation/{DATASET}/fluctuation')]
 
     # with open(f'{CRYPTOBENCH_FOLDER}/folds.json') as f:
     #     folds = json.load(f)
