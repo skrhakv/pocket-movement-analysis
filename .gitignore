@@ -4,3 +4,4 @@ datasets/
 src/utils/__pycache__/
 src/feature-extraction/coevolution/data/
 src/feature-extraction/frustration/modified-pdbs/
+src/feature-extraction/b-factors/__pycache__/
