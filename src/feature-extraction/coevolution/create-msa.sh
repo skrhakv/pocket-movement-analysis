@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 rm data/tmp.sto data/tmp.hmm data/tmp.out.sto data/tmp.output.trimmed.fasta data/tmp.retrieved-sequences.sto data/tmp.retrieved-sequences.fasta data/msa.sto data/msa.fasta
-# Obtain the profiles using the Uniprot proteome reference
+# Obtain the profiles using the Uniprot proteome reference (prot-ref.fasta downloaded here: https://www.ebi.ac.uk/reference_proteomes/)
 phmmer -A data/tmp.sto data/tmp.fasta data/prot-ref.fasta
 
 # Build the profiles using the `hmmbuild` command
